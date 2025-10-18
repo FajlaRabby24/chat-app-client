@@ -4,7 +4,7 @@ import RightSidebar from "../components/RightSidebar";
 import Sidebar from "../components/Sidebar";
 
 const HomePage = () => {
-  const [selectedUser, setSelectedUser] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
 
   return (
     <div className="border w-full h-screen sm:px-[15%] sm:py-[5%]">
