@@ -5,7 +5,7 @@ import assets from "../assets/assets";
 const ProfilePage = () => {
   const [selectedImg, setSelectedImg] = useState(null);
   const [name, setName] = useState("Martin Johnson");
-  const [bio, setBio] = useState("Hi Everyone, I'm useing QuickChat");
+  const [bio, setBio] = useState("Hi Everyone, I'm using QuickChat");
   const navigate = useNavigate();
 
   return (
@@ -36,6 +36,26 @@ const ProfilePage = () => {
             />
             upload profile image
           </label>
+
+          {/* ------- name input -------- */}
+          <input
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            type="text"
+            required
+            placeholder="Your name.."
+            className="p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500"
+          />
+
+          {/* -------- bio ---------- */}
+          <textarea
+            onChange={(e) => setBio(e.target.value)}
+            value={bio}
+            placeholder="Write profile bio"
+            required
+            className="p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500"
+            rows={4}
+          ></textarea>
         </form>
         <img src="" alt="" />
       </div>
