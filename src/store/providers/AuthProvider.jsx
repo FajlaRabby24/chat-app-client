@@ -7,6 +7,7 @@ import { AuthContext } from "../contexts";
 export const AuthProvider = ({ children }) => {
   const axiosPublic = useAxiosPublic();
   const [token, setToken] = useState(localStorage.getItem("token"));
+  const [loading, setLoading] = useState(true);
   const [authUser, setAuthUser] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [socket, setSocket] = useState(null);
@@ -37,6 +38,8 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -59,6 +62,8 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -83,6 +88,8 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -101,6 +108,7 @@ export const AuthProvider = ({ children }) => {
     login,
     logout,
     updateProfile,
+    loading,
   };
 
   return (
