@@ -8,7 +8,7 @@ const ChatProvider = ({ children }) => {
   const { socket } = useAuth();
   const axiosPublic = useAxiosPublic();
 
-  const [message, setmessage] = useState([]);
+  const [messages, setmessages] = useState([]);
   const [users, serUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [unseenMessage, setUnseenMessage] = useState({});
@@ -31,12 +31,28 @@ const ChatProvider = ({ children }) => {
     try {
       const { data } = await axiosPublic.get(`/api/message/${userId}`);
       if (data?.success) {
-        setmessage(data?.messages);
+        setmessages(data?.messages);
       }
     } catch (error) {
       toast.error(error.message);
     }
   };
+
+  // func to send message to selected user
+  const sendMessage = async (messageData) => {
+    try {
+      const { data } = await axiosPublic.post(
+        `/api/message/send/${selectedUser._id}`,
+        messageData
+      );
+      if (data?.success) {
+        setmessages((prev) => [...prev, data?.newMessage]);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   const chatValue = {};
 
   return (
