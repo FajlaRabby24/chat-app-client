@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
@@ -73,7 +73,28 @@ const ChatProvider = ({ children }) => {
     });
   };
 
-  const chatValue = {};
+  // func to unsubscribe from message
+  const unSubscribeFromMessag = async () => {
+    if (socket) socket.off("newMessage");
+  };
+
+  useEffect(() => {
+    subscribeToMessages();
+    return () => unSubscribeFromMessag;
+  }, [socket, selectedUser]);
+
+  const chatValue = {
+    messages,
+    users,
+    selectedUser,
+    getUsers,
+    setmessages,
+    sendMessage,
+    setSelectedUser,
+    unseenMessage,
+    setUnseenMessage,
+    getMessage,
+  };
 
   return (
     <ChatContext.Provider value={chatValue}>{children}</ChatContext.Provider>
