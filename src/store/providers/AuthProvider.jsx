@@ -4,11 +4,19 @@ import { io } from "socket.io-client";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { AuthContext } from "../contexts";
 
+// const demoUser = {
+//   fullName: "Fajla Rabby",
+//   email: "fajlarabbyla24@gmail.com",
+//   password: "dfjk3",
+//   bio: "Hi, there",
+//   profilePic: "",
+// };
+
 export const AuthProvider = ({ children }) => {
   const axiosPublic = useAxiosPublic();
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [loading, setLoading] = useState(true);
-  const [authUser, setAuthUser] = useState(null);
+  const [authUser, setAuthUser] = useState();
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [socket, setSocket] = useState(null);
 
@@ -50,6 +58,7 @@ export const AuthProvider = ({ children }) => {
         `/api/auth/${state}`,
         credentials
       );
+      console.log(state, credentials);
       if (data?.success) {
         setAuthUser(data?.userData);
         connectScoket(data?.userData);
