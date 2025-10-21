@@ -26,6 +26,17 @@ const ChatProvider = ({ children }) => {
     }
   };
 
+  // func to get message for selected user
+  const getMessage = async (userId) => {
+    try {
+      const { data } = await axiosPublic.get(`/api/message/${userId}`);
+      if (data?.success) {
+        setmessage(data?.messages);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
   const chatValue = {};
 
   return (
