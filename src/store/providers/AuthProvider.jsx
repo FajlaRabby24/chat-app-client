@@ -61,6 +61,7 @@ export const AuthProvider = ({ children }) => {
         toast.error(data?.message);
       }
     } catch (error) {
+      console.log("error", error);
       toast.error(error.message);
     } finally {
       setLoading(false);

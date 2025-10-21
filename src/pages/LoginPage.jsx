@@ -1,9 +1,11 @@
 import { useState } from "react";
 import assets from "../assets/assets";
+import useAuth from "../hooks/useAuth";
 
 const LoginPage = () => {
+  const { login } = useAuth();
   const [currState, setCurrState] = useState("Sign up");
-  // const [fullName, setFullName] = useState("");
+  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [bio, setBio] = useState("");
@@ -16,6 +18,13 @@ const LoginPage = () => {
       setIsDataSubmitted(true);
       return;
     }
+
+    login(currState === "Sign up" ? "signup" : "login", {
+      fullName,
+      email,
+      password,
+      bio,
+    });
   };
 
   return (
@@ -47,6 +56,8 @@ const LoginPage = () => {
         {/*-------- full name -------- */}
         {currState === "Sign up" && !isDataSbumitted && (
           <input
+            onChange={(e) => setFullName(e.target.value)}
+            value={fullName}
             type="text "
             className="p-2 border border-gray-500 rounded-md focus:outline-none "
             placeholder="Full name.."
