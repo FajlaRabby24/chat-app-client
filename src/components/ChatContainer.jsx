@@ -8,18 +8,9 @@ import { formateMessageTime } from "../lib/utils";
 const ChatContainer = () => {
   const [input, setInput] = useState("");
   const scrollEnd = useRef(null);
-  const { logout, onlineUsers, authUser } = useAuth();
-  const {
-    getUsers,
-    users,
-    getMessage,
-    selectedUser,
-    setSelectedUser,
-    unseenMessages,
-    sendMessage,
-    setUnseenMessages,
-    messages,
-  } = useChat();
+  const { onlineUsers, authUser } = useAuth();
+  const { getMessage, selectedUser, setSelectedUser, sendMessage, messages } =
+    useChat();
 
   // --------- handleSendMessage -------------
   const handleSendMessage = async (e) => {
