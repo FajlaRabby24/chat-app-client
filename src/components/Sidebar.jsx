@@ -15,7 +15,7 @@ const Sidebar = () => {
     unseenMessages,
     setUnseenMessages,
   } = useChat();
-  const [input, setInput] = useState(false);
+  const [input, setInput] = useState("");
 
   const filteredUsers = input
     ? users?.filter((user) =>
@@ -72,7 +72,13 @@ const Sidebar = () => {
       <div className="flex flex-col ">
         {filteredUsers?.map((user, idx) => (
           <div
-            onClick={() => setSelectedUser(user)}
+            onClick={() => {
+              setSelectedUser(user);
+              setUnseenMessages((prev) => ({
+                ...prev,
+                [user?._id]: 0,
+              }));
+            }}
             key={idx}
             className={`relative flex items-center hover:bg-gray-900 gap-2 p-2 pl-4 rounded cursor-pointer max-sm:text-sm ${
               selectedUser?._id === user._id && "bg-[#282142]/50"
