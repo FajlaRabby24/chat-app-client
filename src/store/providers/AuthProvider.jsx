@@ -19,6 +19,7 @@ export const AuthProvider = ({ children }) => {
   const [authUser, setAuthUser] = useState();
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [socket, setSocket] = useState(null);
+  console.log(onlineUsers);
 
   // connect socket funciton to handle socket connection and online users updates
   const connectScoket = (userData) => {

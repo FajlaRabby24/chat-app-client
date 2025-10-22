@@ -11,7 +11,8 @@ const ChatProvider = ({ children }) => {
   const [messages, setmessages] = useState([]);
   const [users, serUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [unseenMessage, setUnseenMessage] = useState({});
+  const [unseenMessages, setUnseenMessages] = useState({});
+  console.log(unseenMessages);
 
   // func to get all users for sidebar
   const getUsers = async () => {
@@ -19,7 +20,7 @@ const ChatProvider = ({ children }) => {
       const { data } = await axiosPublic.get("/api/message/users");
       if (data?.success) {
         serUsers(data?.users);
-        setUnseenMessage(data?.unseenMessage);
+        setUnseenMessages(data?.unseenMessage);
       }
     } catch (error) {
       toast.error(error.message);
@@ -63,7 +64,7 @@ const ChatProvider = ({ children }) => {
         setmessages((prev) => [...prev, newMessage]);
         axiosPublic.put(`/api/message/mark/${newMessage?._id}`);
       } else {
-        setUnseenMessage((prevUnseenMessages) => ({
+        setUnseenMessages((prevUnseenMessages) => ({
           ...prevUnseenMessages,
           [newMessage.senderId]: prevUnseenMessages[newMessage.senderId]
             ? prevUnseenMessages[newMessage.senderId] + 1
@@ -91,8 +92,8 @@ const ChatProvider = ({ children }) => {
     setmessages,
     sendMessage,
     setSelectedUser,
-    unseenMessage,
-    setUnseenMessage,
+    unseenMessages,
+    setUnseenMessages,
     getMessage,
   };
 
