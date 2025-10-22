@@ -1,10 +1,10 @@
-import { useState } from "react";
 import ChatContainer from "../components/ChatContainer";
 import RightSidebar from "../components/RightSidebar";
 import Sidebar from "../components/Sidebar";
+import useChat from "../hooks/useChat";
 
 const HomePage = () => {
-  const [selectedUser, setSelectedUser] = useState(null);
+  const { selectedUser } = useChat();
 
   return (
     <div className="border w-full h-screen sm:px-[15%] sm:py-[5%]">
@@ -17,10 +17,7 @@ const HomePage = () => {
       >
         <Sidebar />
         <ChatContainer />
-        <RightSidebar
-          selectedUser={selectedUser}
-          setSelectedUser={setSelectedUser}
-        />
+        <RightSidebar />
       </div>
     </div>
   );
