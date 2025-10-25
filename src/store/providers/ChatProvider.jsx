@@ -12,7 +12,6 @@ const ChatProvider = ({ children }) => {
   const [users, serUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [unseenMessages, setUnseenMessages] = useState({});
-  console.log(unseenMessages);
 
   // func to get all users for sidebar
   const getUsers = async () => {

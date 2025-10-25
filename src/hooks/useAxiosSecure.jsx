@@ -11,7 +11,6 @@ const useAxiosSecure = () => {
       return config;
     },
     (error) => {
-      console.log("axios secure file", error.message);
       return Promise.reject(error);
     }
   );
@@ -20,7 +19,6 @@ const useAxiosSecure = () => {
   axiosSecure.interceptors.response.use(
     (res) => res,
     (error) => {
-      console.log("axios secure file", error.message);
       return Promise.reject(error);
     }
   );
